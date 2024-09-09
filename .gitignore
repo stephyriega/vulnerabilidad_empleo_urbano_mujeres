@@ -1,0 +1,7 @@
+
+#Ignore excel, csv and stata files
+*.xlsx
+*.xls
+*.csv
+*.dta
+
