@@ -48,7 +48,7 @@ label var tasa_desemp "Tasa de empleo urbana"
                legend(order(2 "Masculino" 4 "Femenino" 6 "Total") rows(3) region(lcolor(white))) ///
                xtitle("Año") ///
                ytitle("%") ///
-               xlabel(2016(1)2019) ///
+               xlabel(2016(1)2020) ///
                ylabel(90(1)97)
 
 	
