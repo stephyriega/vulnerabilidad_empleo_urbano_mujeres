@@ -8,7 +8,7 @@ ren (B C D E F G H I J K L M N O P) (a_2007 a_2008 a_2009 a_2010 a_2011 a_2012 a
 
 drop if A=="Sexo"
 
-keep A a_2016 a_2017 a_2018 a_2019
+keep A a_2016 a_2017 a_2018 a_2019 a_2020
 
 reshape long a_, i(A) j(año)
 
@@ -16,7 +16,7 @@ label var año "Año"
 ren (a_ A) (tasa_desemp sexo)
 label var tasa_desemp "Tasa de desempleo urbana"
 
-graph twoway (line tasa_desemp año if sexo=="Hombre", color(edkblue)) (line tasa_desemp año if sexo=="Mujer", color(red)) (line tasa_desemp año if sexo=="Total", color(green)),graphregion(color(white)) legend(label(1 "Hombre") label(2 "Mujer") label(3 "Total")rows(1) region(lcolor(white))) xtitle("Año") ytitle("Tasa de desempleo urbana (%)") xlabel(2016(1)2019 , labsize(small)) ylabel(3(1)10, labsize(small))
+graph twoway (line tasa_desemp año if sexo=="Hombre", color(edkblue)) (line tasa_desemp año if sexo=="Mujer", color(red)) (line tasa_desemp año if sexo=="Total", color(green)),graphregion(color(white)) legend(label(1 "Hombre") label(2 "Mujer") label(3 "Total") rows(1) region(lcolor(white)) size(small)) xtitle("Año", size(small)) ytitle("Tasa de desempleo urbana (%)", size(small)) xlabel(2016(1)2020 , labsize(vsmall)) ylabel(4(0.5)10, labsize(vsmall))
 
 graph export "C:\Users\DELL\Documents\GitHub\vulnerabilidad_empleo_urbano_mujeres\output\tasa_desempleo.png", as(png) replace
 
@@ -28,7 +28,7 @@ ren (B C D E F G H I J K L M N O P) (a_2007 a_2008 a_2009 a_2010 a_2011 a_2012 a
 
 drop if A=="   Sexo" | A ==""
 
-keep A a_2016 a_2017 a_2018 a_2019 
+keep A a_2016 a_2017 a_2018 a_2019 a_2020
 
 reshape long a_, i(A) j(año)
 
