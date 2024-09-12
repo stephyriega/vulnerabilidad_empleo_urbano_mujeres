@@ -3,9 +3,9 @@ clear all
 set more off
 mat drop _all
 
-global 	root = "G:\Mi unidad\2021-2\TESIS_1" 
+global 	root = "C:\Users\DELL\Documents\GitHub\vulnerabilidad_empleo_urbano_mujeres" 
 	
-global data = "$root\3_datos"
+global data = "$root\data"
 	
 **************************** MATRICES DE TRANSICION ***********************************
 	
