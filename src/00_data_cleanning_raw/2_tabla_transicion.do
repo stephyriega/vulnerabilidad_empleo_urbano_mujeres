@@ -8,8 +8,33 @@ global 	root = "C:\Users\DELL\Documents\GitHub\vulnerabilidad_empleo_urbano_muje
 global data = "$root\data"
 	
 **************************** MATRICES DE TRANSICION ***********************************
-	
+
+*MUJER
+
+
 use "$data\enaho_final_double_stata.dta", clear
+
+gen panel=substr(num_panel, -5,.)
+
+egen num_panel_e = group(num_panel)
+egen panel_e = group(panel)
+xtset num_panel_e ano
+
+sort num_panel
+order num_panel ano, first
+
+gen desemp=(ocu500!=1)
+sort panel_e
+
+xttrans desemp, freq
+
+by panel_e: xttrans desemp, freq
+
+
+*HOMBRE
+
+
+use "$data\enaho_final_double_stata_hombres.dta", clear
 
 gen panel=substr(num_panel, -5,.)
 
