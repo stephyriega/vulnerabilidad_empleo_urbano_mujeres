@@ -50,14 +50,14 @@ replace y_pri=0 if y_pri==.
 recode y_pri (0=1 "Sin ingresos") (1/499=2 "<500") (500/999=3 "500 - 999") (1000/1499=4 "1000 - 1499") (1500/1001569=5 ">=1500"), gen (ing)
 
 
-foreach var of varlist age educ ing ocupinf p209 pobreza {
+foreach var of varlist age educ ing ocupinf est_civil pobreza {
 
 tab `var', gen(`var'_)
 }
 
 
 
-foreach var of varlist age_* p209_* pobreza_* educ_* ing_* ocupinf_* {
+foreach var of varlist age_* est_civil_* pobreza_* educ_* ing_* ocupinf_* {
 
 ttest `var', by(desemp)
 matrix ttest= (r(mu_1), r(N_1), r(mu_2), r(N_2), r(mu_1) - r(mu_2), r(p))

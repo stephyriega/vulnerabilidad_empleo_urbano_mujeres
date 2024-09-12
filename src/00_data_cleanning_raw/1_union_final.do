@@ -597,10 +597,10 @@ replace n_ano= 1 if n_ano==2
 
 
 *drop if x>200
-/*
+
 save "$data\enaho_final_double_stata.dta", replace
 export excel "$data\enaho_final_double_stata.xlsx", firstrow(var) replace
-*/
+
 
 keep if n_ano==0
 order ano, first
