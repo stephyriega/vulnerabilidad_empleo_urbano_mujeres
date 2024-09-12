@@ -4,9 +4,9 @@ clear all
 set more off
 mat drop _all
 
-global 	root = "G:\Mi unidad\PUCP\2021-2\TESIS_1" 
+global 	root = "C:\Users\DELL\Documents\GitHub\vulnerabilidad_empleo_urbano_mujeres" 
 	
-global data = "$root\3_datos"
+global data = "$root\data"
 
 
 
@@ -49,6 +49,19 @@ keep if resi==1
 
 **# Reconstrucción de variables individuales
 *------------------------------------------------------------------------------*
+
+* estado civil
+
+gen est_civil=.
+replace est_civil=1 if p209==1 | p209==2
+replace est_civil=2 if p209==3 | p209==4
+replace est_civil=3 if p209==5 | p209==6
+drop p209
+
+lab def estc 1 "Convivienda/Casada" 2 "Viuda/Divorciada" 3 "Separado/Soltero/"
+
+label values est_civil estc
+label variable est_civil "Estado civil"
 
 
 ********** lenguaje materno *********
@@ -507,6 +520,7 @@ sort num_panel ano
 *solo nos quedamos con las clasificadas como mujeres en el area urbano
 *sexo
 keep if p207==2
+drop p207
 
 *area
 recode estrato(1/5=1 "Urbano") (6/8=0 "Rural"), gen(area) 
@@ -599,14 +613,14 @@ drop año_1 año_2 n_ano
 
 *quedamos solo con las variables transformadas + algunas individuales que si sirven: 
 
-keep p300a y_pri_dep y_pri_indep y_pri y_sec_dep  y_sec_ind  y_sec   y_mkt sector educ dpto regnat estrato pobre2  gpcm pobre2 nbi1_pobre ingtrabw ipcr_* tamahno ciiu_1d ciiu_6c p_relativa p558e6 celular gpgru* analfa  n_edad_* n_matr_*  menor_trabaja ano_reg deg_desemp p208a ocupinf emplpsec p517 p22 p101 p102 p103 p103a p104a p104b1 p104b2  p105a p106a p110   p111a p1141 p1142 p1143  p1144 p1145 i1172_01 i1172_02 i1173_01 i1173_02 p203 p204 p208a p209 p302 p306  p314a  p203a p401c p401f p401h1 p401h2 p401h3 p401h4 p401h5 p401h6 p4191 p4192 p4193 p4194 p4195 p4196 p4197 p4198 p501 p506r4 p510a1 p511a  p512b p512a p513t p523 p558c p599 num_panel ano
+keep p300a y_pri_dep y_pri_indep y_pri y_sec_dep  y_sec_ind  y_sec   y_mkt sector educ dpto regnat estrato pobre2  gpcm pobre2 nbi1_pobre ingtrabw ipcr_* tamahno ciiu_1d ciiu_6c p_relativa p558e6 celular gpgru* analfa  n_edad_* n_matr_*  menor_trabaja ano_reg deg_desemp p208a ocupinf emplpsec p517 p22 p101 p102 p103 p103a p104a p104b1 p104b2  p105a p106a p110   p111a p1141 p1142 p1143  p1144 p1145 i1172_01 i1172_02 i1173_01 i1173_02 p203 p204 p208a est_civil p302 p306  p314a  p203a p401c p401f p401h1 p401h2 p401h3 p401h4 p401h5 p401h6 p4191 p4192 p4193 p4194 p4195 p4196 p4197 p4198 p501 p506r4 p510a1 p511a  p512b p512a p513t p523 p558c p599 num_panel ano
 
 
 save "$data\enaho_final_one_python_230823.dta", replace
 
 export excel using "$data\enaho_final_one_python_230823.xlsx", firstrow (variable) nolabel replace
 
-x
+
 ***************************** AÑO 2020 ******************************************
 
 use "$data\enaho_final_double_stata.dta", clear
